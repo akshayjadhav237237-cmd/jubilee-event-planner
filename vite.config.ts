@@ -41,8 +41,8 @@ export default defineConfig({
     setupFiles: ['./tests/setup.ts'],
     coverage: {
       provider: 'v8',
-      include: ['src/domain/**', 'src/shared/lib/**', 'src/state/**'],
-      exclude: ['src/**/types.ts', 'src/domain/types.ts', 'src/state/types.ts'],
+      include: ['src/domain/**', 'src/shared/lib/**', 'src/state/**', 'src/ai/**'],
+      exclude: ['src/**/types.ts', 'src/domain/types.ts', 'src/state/types.ts', 'src/ai/ports.ts'],
       thresholds: {
         lines: 90,
         branches: 85,
