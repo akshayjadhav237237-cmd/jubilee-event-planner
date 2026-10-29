@@ -1,0 +1,39 @@
+export type Ok<T> = {
+  readonly ok: true;
+  readonly value: T;
+};
+
+export type Err<E> = {
+  readonly ok: false;
+  readonly error: E;
+};
+
+export type Result<T, E> = Ok<T> | Err<E>;
+
+/** Wraps a value in a successful Result. */
+export function ok<T>(value: T): Ok<T> {
+  return { ok: true, value };
+}
+
+/** Wraps an error in an unsuccessful Result. */
+export function err<E>(error: E): Err<E> {
+  return { ok: false, error };
+}
+
+/** Type guard checking if a Result is Ok. */
+export function isOk<T, E>(result: Result<T, E>): result is Ok<T> {
+  return result.ok;
+}
+
+/** Maps a successful Result value using the provided transformation function. */
+export function mapResult<T, U, E>(result: Result<T, E>, fn: (val: T) => U): Result<U, E> {
+  if (result.ok) {
+    return { ok: true, value: fn(result.value) };
+  }
+  return result;
+}
+
+/** Asserts exhaustive checking for discriminated unions. */
+export function assertNever(x: never, message = 'Unexpected unreachable value'): never {
+  throw new Error(`${message}: ${String(x)}`);
+}
