@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+.system_generated
+*.log
+*.tsbuildinfo
+.DS_Store
