@@ -54,3 +54,12 @@ A task or feature is complete only when:
 3. Every file stays strictly under 200 lines.
 4. All static analysis, typechecking, and tests pass via `npm run check`.
 5. No feature claims exist in UI copy or documentation without matching automated tests.
+
+## Unattended Operation
+
+- Never ask questions. Decide, and record the assumption in the final report.
+- If blocked after 3 honest attempts, revert only that change, continue, list it as BLOCKED.
+- Never leave main red. After every push wait for CI. If red, fix forward. After 5 failed attempts use git revert (never force-push).
+- Before every push: npm run check exits 0.
+- Counts in docs and UI copy come from commands or tests, never from memory.
+- Kill every server and process you start.
