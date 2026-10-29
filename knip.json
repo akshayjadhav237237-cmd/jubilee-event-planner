@@ -3,7 +3,6 @@
   "entry": ["src/config/constants.ts", "src/config/csp.ts"],
   "project": ["src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
   "ignore": ["src/domain/types.ts"],
-  "ignoreDependencies": ["zustand"],
   "rules": {
     "exports": "off",
     "types": "off"
