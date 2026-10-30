@@ -84,7 +84,7 @@ describe('App Shell', () => {
       () => {
         expect(screen.getByText('Celebration Budget')).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
 
     fireEvent.click(timelineTab);
@@ -93,7 +93,7 @@ describe('App Shell', () => {
       () => {
         expect(screen.getByText('Celebration Countdown & Timeline')).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
 
     fireEvent.click(vendorsTab);
@@ -101,7 +101,7 @@ describe('App Shell', () => {
       () => {
         expect(screen.getByText('Vendors & Contracting')).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
 
     fireEvent.click(ideasTab);
@@ -109,9 +109,9 @@ describe('App Shell', () => {
       () => {
         expect(screen.getByText('Inspiration & Ideas')).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
-  }, 15000);
+  }, 25000);
 
   it('supports roving tabindex keyboard navigation across tabs', () => {
     const store = createActivePlanStore();

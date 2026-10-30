@@ -16,7 +16,7 @@ export function triggerBrowserDownload(content: string, filename: string, mimeTy
   const anchor = document.createElement('a');
   anchor.href = objectUrl;
   anchor.download = filename;
-  anchor.style.display = 'none';
+  anchor.hidden = true;
 
   document.body.appendChild(anchor);
   anchor.click();

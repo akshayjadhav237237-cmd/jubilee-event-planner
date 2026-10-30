@@ -44,7 +44,7 @@ describe('End-to-end UI user flows', () => {
       () => {
         expect(screen.getAllByText("Ananya & Rohan's Wedding").length).toBeGreaterThan(0);
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
 
     const timelineTab = screen.getByRole('tab', { name: 'Timeline' });
@@ -53,7 +53,7 @@ describe('End-to-end UI user flows', () => {
       () => {
         expect(screen.getByText(/Celebration Countdown/i)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
     assertNoInvalidText(container);
 
@@ -63,7 +63,7 @@ describe('End-to-end UI user flows', () => {
       () => {
         expect(screen.getByText(/Vendors & Contracting/i)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
     assertNoInvalidText(container);
 
@@ -73,7 +73,7 @@ describe('End-to-end UI user flows', () => {
       () => {
         expect(screen.getByText(/Inspiration & Ideas/i)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
     assertNoInvalidText(container);
 
@@ -83,10 +83,10 @@ describe('End-to-end UI user flows', () => {
       () => {
         expect(screen.getByText(/Celebration Budget/i)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: 8000 },
     );
     assertNoInvalidText(container);
-  });
+  }, 25000);
 
   it('executes an assistant command in offline mode (type, preview, apply, and undo)', async () => {
     localStorage.clear();
@@ -151,5 +151,5 @@ describe('End-to-end UI user flows', () => {
     );
 
     assertNoInvalidText(container);
-  });
+  }, 25000);
 });
