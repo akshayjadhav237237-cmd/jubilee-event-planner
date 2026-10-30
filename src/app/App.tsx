@@ -1,6 +1,8 @@
 import { useState, type JSX } from 'react';
 import { usePlan } from '../state/hooks';
+import { getStorageNotice } from '../state/persistence';
 import { SkipLink } from '../shared/ui/SkipLink';
+import { Alert } from '../shared/ui/Alert';
 import { Header } from './Header';
 import { Workspace } from './Workspace';
 import { Launchpad } from '../features/intake/Launchpad';
@@ -11,10 +13,21 @@ import { AppProviders } from './AppProviders';
 export function AppContent(): JSX.Element {
   const plan = usePlan();
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+  const notice = getStorageNotice();
 
   return (
     <div className="min-h-screen bg-paper-bg text-ink-text flex flex-col">
       <SkipLink targetId="main-content" />
+
+      {notice && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 w-full">
+          <Alert
+            severity="warn"
+            title="Storage Notice"
+            message={`${notice.message}. Jubilee has started with a fresh workspace.`}
+          />
+        </div>
+      )}
 
       {plan === null ? (
         <>

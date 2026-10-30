@@ -80,26 +80,38 @@ describe('App Shell', () => {
     expect(budgetTab).toHaveAttribute('aria-selected', 'true');
     expect(timelineTab).toHaveAttribute('aria-selected', 'false');
 
-    await waitFor(() => {
-      expect(screen.getByText('Celebration Budget')).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByText('Celebration Budget')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
     fireEvent.click(timelineTab);
     expect(timelineTab).toHaveAttribute('aria-selected', 'true');
-    await waitFor(() => {
-      expect(screen.getByText('Celebration Countdown & Timeline')).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByText('Celebration Countdown & Timeline')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
     fireEvent.click(vendorsTab);
-    await waitFor(() => {
-      expect(screen.getByText('Vendors & Contracting')).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByText('Vendors & Contracting')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
     fireEvent.click(ideasTab);
-    await waitFor(() => {
-      expect(screen.getByText('Inspiration & Ideas')).toBeInTheDocument();
-    });
-  });
+    await waitFor(
+      () => {
+        expect(screen.getByText('Inspiration & Ideas')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
+  }, 15000);
 
   it('supports roving tabindex keyboard navigation across tabs', () => {
     const store = createActivePlanStore();

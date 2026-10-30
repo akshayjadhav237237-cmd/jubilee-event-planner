@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type JSX, type ReactNode } from 'r
 import type { PlanStore } from '../state/types';
 import { PlanStoreContext } from '../state/hooks';
 import { createPlanStore } from '../state/store';
-import { createMemoryStorage } from '../state/memoryStorage';
+import { createLocalStoragePort } from '../state/persistence';
 import type { AssistantProvider } from '../ai/ports';
 import { createAssistant } from '../ai/factory';
 import { createMemoryApiKey } from '../ai/apiKey';
@@ -26,7 +26,7 @@ export interface AppProvidersProps {
 
 function createDefaultStore(): PlanStore {
   return createPlanStore({
-    storage: createMemoryStorage(),
+    storage: createLocalStoragePort(),
     clock: () => new Date(),
     ids: () => `id_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
   });

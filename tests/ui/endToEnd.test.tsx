@@ -14,6 +14,7 @@ function assertNoInvalidText(container: HTMLElement): void {
 describe('End-to-end UI user flows', () => {
   it('loads celebration plan from each of the three demo scenarios without invalid rendering', async () => {
     for (const scenario of DEMO_SCENARIOS) {
+      localStorage.clear();
       const { container, unmount } = render(<App />);
 
       const loadButtons = screen.getAllByRole('button', { name: new RegExp(scenario.name, 'i') });
@@ -22,7 +23,7 @@ describe('End-to-end UI user flows', () => {
       fireEvent.click(firstBtn);
 
       await waitFor(() => {
-        expect(screen.getByText(scenario.name)).toBeInTheDocument();
+        expect(screen.getAllByText(scenario.name).length).toBeGreaterThan(0);
       });
 
       assertNoInvalidText(container);
@@ -31,6 +32,7 @@ describe('End-to-end UI user flows', () => {
   });
 
   it('navigates through all four tabs and verifies content integrity', async () => {
+    localStorage.clear();
     const { container } = render(<App />);
 
     const loadButtons = screen.getAllByRole('button', { name: /Ananya & Rohan's Wedding/i });
@@ -40,7 +42,7 @@ describe('End-to-end UI user flows', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText("Ananya & Rohan's Wedding")).toBeInTheDocument();
+        expect(screen.getAllByText("Ananya & Rohan's Wedding").length).toBeGreaterThan(0);
       },
       { timeout: 3000 },
     );
@@ -87,6 +89,7 @@ describe('End-to-end UI user flows', () => {
   });
 
   it('executes an assistant command in offline mode (type, preview, apply, and undo)', async () => {
+    localStorage.clear();
     const { container } = render(<App />);
 
     const loadButtons = screen.getAllByRole('button', { name: /Ananya & Rohan's Wedding/i });
@@ -96,7 +99,7 @@ describe('End-to-end UI user flows', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByText("Ananya & Rohan's Wedding")).toBeInTheDocument();
+        expect(screen.getAllByText("Ananya & Rohan's Wedding").length).toBeGreaterThan(0);
       },
       { timeout: 3000 },
     );

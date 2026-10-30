@@ -1,8 +1,9 @@
 import { lazy, Suspense, useState, type JSX } from 'react';
-import { usePlan } from '../state/hooks';
+import { usePlan, useDispatch } from '../state/hooks';
 import { Header } from './Header';
 import { VitalsStrip } from './VitalsStrip';
 import { AssistantDrawer } from '../features/assistant/AssistantDrawer';
+import { WorkspaceModals } from './WorkspaceModals';
 import { Tabs } from '../shared/ui';
 
 const BudgetPanel = lazy(() =>
@@ -41,8 +42,12 @@ function renderActivePanel(tab: TabKey): JSX.Element {
 /** Renders the active plan workspace including header, vitals strip, tabs, and feature panels. */
 export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.Element | null {
   const plan = usePlan();
+  const { restorePlan, reset } = useDispatch();
   const [activeTab, setActiveTab] = useState<TabKey>(defaultTab);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+  const [isExportOpen, setIsExportOpen] = useState(false);
+  const [isRestoreOpen, setIsRestoreOpen] = useState(false);
+  const [isResetOpen, setIsResetOpen] = useState(false);
 
   if (!plan) {
     return null;
@@ -53,6 +58,9 @@ export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.E
       <Header
         onToggleAssistant={() => setIsAssistantOpen((prev) => !prev)}
         isAssistantOpen={isAssistantOpen}
+        onExport={() => setIsExportOpen(true)}
+        onRestore={() => setIsRestoreOpen(true)}
+        onReset={() => setIsResetOpen(true)}
       />
       <main
         id="main-content"
@@ -98,6 +106,18 @@ export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.E
       </main>
 
       <AssistantDrawer open={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+
+      <WorkspaceModals
+        plan={plan}
+        isExportOpen={isExportOpen}
+        isRestoreOpen={isRestoreOpen}
+        isResetOpen={isResetOpen}
+        onCloseExport={() => setIsExportOpen(false)}
+        onCloseRestore={() => setIsRestoreOpen(false)}
+        onCloseReset={() => setIsResetOpen(false)}
+        onRestore={(restored) => restorePlan(restored)}
+        onReset={() => reset()}
+      />
     </div>
   );
 }
