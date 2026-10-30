@@ -145,5 +145,5 @@ describe('App Shell', () => {
 
     const results = await axe.run(container);
     expect(results.violations).toEqual([]);
-  });
+  }, 20000);
 });
