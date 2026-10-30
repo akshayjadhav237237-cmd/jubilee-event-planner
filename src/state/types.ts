@@ -17,6 +17,7 @@ export type PlanStoreState = {
 
 export type PlanStoreActions = {
   readonly createPlan: (brief: EventBrief) => Result<Plan, CommandError>;
+  readonly restorePlan: (plan: Plan) => void;
   readonly dispatch: (cmd: PlanCommand) => Result<Plan, CommandError>;
   readonly dispatchMany: (cmds: readonly PlanCommand[]) => Result<Plan, CommandError>;
   readonly undo: () => boolean;

@@ -1,4 +1,11 @@
 import '@testing-library/jest-dom';
+import { beforeEach } from 'vitest';
+
+beforeEach(() => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    window.localStorage.clear();
+  }
+});
 
 if (typeof HTMLCanvasElement !== 'undefined') {
   HTMLCanvasElement.prototype.getContext = () => null;

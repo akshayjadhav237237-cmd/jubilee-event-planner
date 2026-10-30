@@ -93,6 +93,10 @@ function createHistoryActions(
     },
     reset: (): void => {
       set({ history: createHistory<Plan | null>(null) });
+      const storageWithClear = deps.storage as { clearStorage?: () => void };
+      if (typeof storageWithClear.clearStorage === 'function') {
+        storageWithClear.clearStorage();
+      }
     },
     getPlan: (): Plan | null => get().history.present,
   };
@@ -109,6 +113,10 @@ function createStoreActions(
       set((prev) => ({ history: pushHistory(prev.history, plan) }));
       deps.storage.save(plan);
       return ok(plan);
+    },
+    restorePlan: (plan: Plan): void => {
+      set((prev) => ({ history: pushHistory(prev.history, plan) }));
+      deps.storage.save(plan);
     },
     ...createDispatchActions(deps, set, get),
     ...createHistoryActions(deps, set, get),
@@ -128,6 +136,7 @@ export function createPlanStore(deps: PlanStoreDependencies): PlanStore {
   return Object.assign(vanillaStore, {
     createPlan: (brief: EventBrief): Result<Plan, CommandError> =>
       vanillaStore.getState().createPlan(brief),
+    restorePlan: (plan: Plan): void => vanillaStore.getState().restorePlan(plan),
     dispatch: (cmd: PlanCommand): Result<Plan, CommandError> =>
       vanillaStore.getState().dispatch(cmd),
     dispatchMany: (cmds: readonly PlanCommand[]): Result<Plan, CommandError> =>

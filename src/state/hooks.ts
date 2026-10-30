@@ -8,6 +8,8 @@ export type DispatchActions = {
   readonly dispatch: PlanStoreActions['dispatch'];
   readonly dispatchMany: PlanStoreActions['dispatchMany'];
   readonly createPlan: PlanStoreActions['createPlan'];
+  readonly restorePlan: PlanStoreActions['restorePlan'];
+  readonly reset: PlanStoreActions['reset'];
 };
 
 export type HistoryState = {
@@ -40,6 +42,8 @@ export function useDispatch(): DispatchActions {
     dispatch: store.dispatch,
     dispatchMany: store.dispatchMany,
     createPlan: store.createPlan,
+    restorePlan: store.restorePlan,
+    reset: store.reset,
   };
 }
 
