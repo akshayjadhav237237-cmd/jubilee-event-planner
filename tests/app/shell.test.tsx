@@ -51,14 +51,14 @@ describe('App Shell', () => {
     render(<App />);
 
     const assistantButton = screen.getByRole('button', { name: 'Open planning assistant' });
-    expect(screen.queryByRole('complementary', { name: 'Planning assistant' })).toBeNull();
+    expect(screen.queryByRole('dialog', { name: 'Celebration AI Assistant' })).toBeNull();
 
     fireEvent.click(assistantButton);
-    expect(screen.getByRole('complementary', { name: 'Planning assistant' })).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Celebration AI Assistant' })).toBeInTheDocument();
 
-    const closeButton = screen.getByRole('button', { name: 'Close assistant' });
+    const closeButton = screen.getByRole('button', { name: 'Close dialog' });
     fireEvent.click(closeButton);
-    expect(screen.queryByRole('complementary', { name: 'Planning assistant' })).toBeNull();
+    expect(screen.queryByRole('dialog', { name: 'Celebration AI Assistant' })).toBeNull();
   });
 
   it('renders workspace with vitals and tab panels when a plan is active', async () => {
@@ -81,23 +81,23 @@ describe('App Shell', () => {
     expect(timelineTab).toHaveAttribute('aria-selected', 'false');
 
     await waitFor(() => {
-      expect(screen.getByText('Budget Allocations')).toBeInTheDocument();
+      expect(screen.getByText('Celebration Budget')).toBeInTheDocument();
     });
 
     fireEvent.click(timelineTab);
     expect(timelineTab).toHaveAttribute('aria-selected', 'true');
     await waitFor(() => {
-      expect(screen.getByText('Event Timeline')).toBeInTheDocument();
+      expect(screen.getByText('Celebration Countdown & Timeline')).toBeInTheDocument();
     });
 
     fireEvent.click(vendorsTab);
     await waitFor(() => {
-      expect(screen.getByText('Vendor Checklist & Quotes')).toBeInTheDocument();
+      expect(screen.getByText('Vendors & Contracting')).toBeInTheDocument();
     });
 
     fireEvent.click(ideasTab);
     await waitFor(() => {
-      expect(screen.getByText('Inspiration & Saved Ideas')).toBeInTheDocument();
+      expect(screen.getByText('Inspiration & Ideas')).toBeInTheDocument();
     });
   });
 

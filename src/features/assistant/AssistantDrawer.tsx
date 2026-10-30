@@ -1,36 +1,99 @@
-import type { JSX } from 'react';
+import { useState, type FormEvent, type JSX } from 'react';
+import type { AssistantProvider, AssistantResult } from '../../ai/ports';
+import { createAssistant } from '../../ai/factory';
+import { createMemoryApiKey } from '../../ai/apiKey';
+import { usePlan, useDispatch } from '../../state/hooks';
+import { Dialog, Badge, Button } from '../../shared/ui';
+import { getModeExplanation } from './view';
+import { AssistantResponseDisplay } from './AssistantResponseDisplay';
+import { AssistantPromptForm } from './AssistantPromptForm';
+import { ApiKeySettingsModal } from './ApiKeySettingsModal';
 
 export interface AssistantDrawerProps {
   readonly open: boolean;
   readonly onClose: () => void;
+  readonly assistant?: AssistantProvider;
 }
 
-/** Renders the slide-out planning assistant drawer placeholder. */
-export function AssistantDrawer({ open, onClose }: AssistantDrawerProps): JSX.Element | null {
-  if (!open) {
-    return null;
-  }
+const DEFAULT_API_KEY_PORT = createMemoryApiKey();
+
+/** Slide-over assistant drawer enabling natural-language plan modification and command diff previews. */
+export function AssistantDrawer({ open, onClose, assistant }: AssistantDrawerProps): JSX.Element {
+  const plan = usePlan();
+  const { dispatchMany } = useDispatch();
+  const [activeAssistant] = useState<AssistantProvider>(
+    () => assistant ?? createAssistant({ apiKeyPort: DEFAULT_API_KEY_PORT }),
+  );
+  const [prompt, setPrompt] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<AssistantResult | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [hasApiKey, setHasApiKey] = useState(false);
+
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
+    e.preventDefault();
+    if (!plan || prompt.trim().length === 0) return;
+    setLoading(true);
+    setErrorMessage(null);
+    const res = await activeAssistant.interpret({ prompt: prompt.trim(), plan });
+    setLoading(false);
+    if (!res.ok) {
+      setErrorMessage(res.error.message || res.error.code);
+      return;
+    }
+    setResult(res.value);
+  };
 
   return (
-    <aside
-      id="assistant-drawer"
-      aria-label="Planning assistant"
-      className="fixed inset-y-0 right-0 w-80 max-w-full bg-white shadow-2xl border-l border-stone-200 p-6 z-50 flex flex-col"
-    >
-      <div className="flex items-center justify-between mb-4 border-b border-stone-100 pb-3">
-        <h2 className="text-lg font-bold text-stone-900">Planning Assistant</h2>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close assistant"
-          className="text-stone-500 hover:text-stone-800 p-1.5 rounded focus:outline-none focus:ring-2 focus:ring-teal-primary"
-        >
-          ✕
-        </button>
+    <Dialog open={open} onClose={onClose} title="Celebration AI Assistant">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <Badge
+            text={activeAssistant.mode === 'live' ? 'Live Mode' : 'Offline Mode'}
+            variant={activeAssistant.mode === 'live' ? 'success' : 'neutral'}
+          />
+          <Button variant="ghost" onClick={() => setIsSettingsOpen(true)}>
+            API Key Settings
+          </Button>
+        </div>
+
+        <p className="text-xs text-stone-600">
+          {getModeExplanation(activeAssistant.mode, hasApiKey)}
+        </p>
+
+        <AssistantPromptForm
+          prompt={prompt}
+          loading={loading}
+          disabled={!plan}
+          onPromptChange={setPrompt}
+          onSubmit={handleSubmit}
+        />
+
+        <AssistantResponseDisplay
+          errorMessage={errorMessage}
+          result={result}
+          onDismiss={() => setResult(null)}
+          onApply={(cmds) => {
+            dispatchMany(cmds);
+            setResult(null);
+            onClose();
+          }}
+        />
       </div>
-      <p className="text-sm text-stone-600">
-        Ask questions, explore suggestions, or test automated scenario adjustments.
-      </p>
-    </aside>
+
+      <ApiKeySettingsModal
+        open={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onSaveKey={(k) => {
+          DEFAULT_API_KEY_PORT.set(k);
+          setHasApiKey(true);
+        }}
+        onClearKey={() => {
+          DEFAULT_API_KEY_PORT.clear();
+          setHasApiKey(false);
+        }}
+      />
+    </Dialog>
   );
 }

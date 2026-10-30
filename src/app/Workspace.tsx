@@ -59,6 +59,15 @@ export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.E
         tabIndex={-1}
         className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-1 outline-none w-full"
       >
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink-text">
+            {plan.brief.title}
+          </h2>
+          <p className="text-xs text-stone-500 uppercase tracking-wider mt-1">
+            {plan.brief.eventType} • {plan.brief.guestCount} guests • {plan.brief.eventDate}
+          </p>
+        </div>
+
         <VitalsStrip plan={plan} />
 
         <Tabs
