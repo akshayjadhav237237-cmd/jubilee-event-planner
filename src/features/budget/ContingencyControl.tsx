@@ -18,7 +18,7 @@ export function ContingencyControl({ rate, onChange }: ContingencyControlProps):
         <label htmlFor="contingency-slider" className="text-sm font-medium text-ink-text">
           Contingency Reserve: {rate}%
         </label>
-        <span className="text-xs text-stone-500 font-mono">Max 15%</span>
+        <span className="text-xs text-stone-700 font-mono font-medium">Max 15%</span>
       </div>
       <input
         id="contingency-slider"
@@ -33,7 +33,7 @@ export function ContingencyControl({ rate, onChange }: ContingencyControlProps):
         aria-valuemax={15}
         aria-valuenow={rate}
       />
-      <p className="text-xs text-stone-500 mt-2">
+      <p className="text-xs text-stone-700 mt-2">
         Contingency protects against unexpected cost inflation and weather adaptations.
       </p>
     </div>

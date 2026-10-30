@@ -1,9 +1,16 @@
-import type { JSX } from 'react';
+import { lazy, Suspense, type JSX } from 'react';
 import type { Plan } from '../domain/types';
-import { ExportModal } from '../features/export/ExportModal';
-import { RestoreModal } from '../features/export/RestoreModal';
-import { ResetConfirmDialog } from '../features/reset/ResetConfirmDialog';
 import { PrintBrief } from '../features/print/PrintBrief';
+
+const ExportModal = lazy(() =>
+  import('../features/export/ExportModal').then((m) => ({ default: m.ExportModal })),
+);
+const RestoreModal = lazy(() =>
+  import('../features/export/RestoreModal').then((m) => ({ default: m.RestoreModal })),
+);
+const ResetConfirmDialog = lazy(() =>
+  import('../features/reset/ResetConfirmDialog').then((m) => ({ default: m.ResetConfirmDialog })),
+);
 
 export interface WorkspaceModalsProps {
   readonly plan: Plan;
@@ -31,9 +38,15 @@ export function WorkspaceModals({
 }: WorkspaceModalsProps): JSX.Element {
   return (
     <>
-      <ExportModal isOpen={isExportOpen} onClose={onCloseExport} plan={plan} />
-      <RestoreModal isOpen={isRestoreOpen} onClose={onCloseRestore} onRestore={onRestore} />
-      <ResetConfirmDialog isOpen={isResetOpen} onClose={onCloseReset} onConfirm={onReset} />
+      <Suspense fallback={null}>
+        {isExportOpen && <ExportModal isOpen={isExportOpen} onClose={onCloseExport} plan={plan} />}
+        {isRestoreOpen && (
+          <RestoreModal isOpen={isRestoreOpen} onClose={onCloseRestore} onRestore={onRestore} />
+        )}
+        {isResetOpen && (
+          <ResetConfirmDialog isOpen={isResetOpen} onClose={onCloseReset} onConfirm={onReset} />
+        )}
+      </Suspense>
       <div className="print-brief hidden print:block">
         <PrintBrief plan={plan} />
       </div>

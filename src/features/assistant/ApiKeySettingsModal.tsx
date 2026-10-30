@@ -67,7 +67,7 @@ export function ApiKeySettingsModal({
           <span className="font-semibold text-stone-800 block">Privacy Contract:</span>
           <div>
             <span className="text-stone-600 font-medium">Fields Disclosed to AI:</span>
-            <p className="font-mono text-[10px] text-stone-500 mt-0.5">{sentFields.join(', ')}</p>
+            <p className="font-mono text-[10px] text-stone-700 mt-0.5">{sentFields.join(', ')}</p>
           </div>
           <div>
             <span className="text-emerald-800 font-medium">Confidential Fields Withheld:</span>

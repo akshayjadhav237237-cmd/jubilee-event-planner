@@ -46,7 +46,7 @@ export function TaskCard({ task, allTasks, onToggle, onReschedule }: TaskCardPro
             <label
               htmlFor={`task-check-${task.id}`}
               className={`text-sm font-medium cursor-pointer block ${
-                task.completed ? 'line-through text-stone-400' : 'text-ink-text'
+                task.completed ? 'line-through text-stone-600' : 'text-ink-text'
               }`}
             >
               {task.title}
@@ -66,7 +66,7 @@ export function TaskCard({ task, allTasks, onToggle, onReschedule }: TaskCardPro
                 <button
                   type="button"
                   onClick={() => setIsEditingDate(true)}
-                  className="text-xs text-stone-500 hover:text-gold-accent underline font-mono"
+                  className="text-xs text-stone-700 hover:text-gold-accent underline font-mono font-medium"
                   aria-label={`Due ${task.dueDate}, click to reschedule`}
                 >
                   Due: {task.dueDate}
@@ -78,13 +78,13 @@ export function TaskCard({ task, allTasks, onToggle, onReschedule }: TaskCardPro
       </div>
 
       {dependencies.length > 0 && (
-        <div className="mt-3 pt-2 border-t border-stone-100 pl-7 text-xs text-stone-500 space-y-1">
+        <div className="mt-3 pt-2 border-t border-stone-100 pl-7 text-xs text-stone-700 space-y-1">
           <span className="font-semibold text-stone-600">Dependencies:</span>
           <ul className="list-disc pl-4 space-y-0.5">
             {dependencies.map((dep) => (
               <li
                 key={dep.id}
-                className={dep.completed ? 'text-emerald-700 font-medium' : 'text-stone-500'}
+                className={dep.completed ? 'text-emerald-700 font-medium' : 'text-stone-700'}
               >
                 {dep.title} {dep.completed ? '✓' : '(pending)'}
               </li>

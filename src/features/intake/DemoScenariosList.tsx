@@ -34,7 +34,7 @@ export function DemoScenariosList({ onSelectScenario }: DemoScenariosListProps):
             </div>
 
             <div className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs text-stone-500 font-mono">
+              <span className="text-xs text-stone-700 font-mono font-medium">
                 {demo.brief.currency} {(demo.brief.totalBudget / 100).toLocaleString()}
               </span>
               <Button

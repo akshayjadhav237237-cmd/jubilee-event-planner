@@ -15,7 +15,7 @@ export function IdeaCard({ idea, isSaved, onToggleSave }: IdeaCardProps): JSX.El
       <div>
         <div className="flex items-center justify-between gap-2 mb-2">
           <Badge text={idea.category} variant="neutral" />
-          <span className="text-xs text-stone-500 font-mono">Score: {idea.votes}</span>
+          <span className="text-xs text-stone-700 font-mono font-medium">Score: {idea.votes}</span>
         </div>
         <h3 className="font-semibold text-ink-text text-base">{idea.title}</h3>
         <p className="text-xs text-stone-600 mt-1 leading-relaxed">{idea.description}</p>

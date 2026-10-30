@@ -71,7 +71,7 @@ export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.E
           <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink-text">
             {plan.brief.title}
           </h2>
-          <p className="text-xs text-stone-500 uppercase tracking-wider mt-1">
+          <p className="text-xs text-stone-700 font-medium uppercase tracking-wider mt-1">
             {plan.brief.eventType} • {plan.brief.guestCount} guests • {plan.brief.eventDate}
           </p>
         </div>
@@ -95,7 +95,7 @@ export function Workspace({ defaultTab = 'budget' }: WorkspaceProps = {}): JSX.E
         >
           <Suspense
             fallback={
-              <div role="status" aria-live="polite" className="p-6 text-stone-500">
+              <div role="status" aria-live="polite" className="p-6 text-stone-700">
                 Loading section...
               </div>
             }

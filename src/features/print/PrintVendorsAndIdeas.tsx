@@ -18,7 +18,7 @@ export function PrintVendorsSection({ plan }: { readonly plan: Plan }): JSX.Elem
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs">
           {vendorChecklist.map((c) => (
             <li key={c.id} className="flex items-center gap-1.5">
-              <span className="font-mono text-stone-500">[{c.completed ? 'X' : ' '}]</span>
+              <span className="font-mono text-stone-700">[{c.completed ? 'X' : ' '}]</span>
               <span>{c.title}</span>
             </li>
           ))}
@@ -30,7 +30,7 @@ export function PrintVendorsSection({ plan }: { readonly plan: Plan }): JSX.Elem
           Vendor Quotes
         </h3>
         {quotes.length === 0 ? (
-          <p className="text-xs text-stone-500 italic">No vendor quotes recorded yet.</p>
+          <p className="text-xs text-stone-700 italic">No vendor quotes recorded yet.</p>
         ) : (
           <table className="w-full text-left text-xs border border-stone-300">
             <thead className="bg-stone-100 border-b border-stone-300">
@@ -70,7 +70,7 @@ export function PrintIdeasSection({ plan }: { readonly plan: Plan }): JSX.Elemen
         Pillar 4: Personalized Ideas & Concepts
       </h2>
       {ideas.length === 0 ? (
-        <p className="text-xs text-stone-500 italic">No ideas selected yet.</p>
+        <p className="text-xs text-stone-700 italic">No ideas selected yet.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {ideas.map((idea) => (
@@ -79,7 +79,9 @@ export function PrintIdeasSection({ plan }: { readonly plan: Plan }): JSX.Elemen
               className="border border-stone-200 rounded p-2.5 text-xs bg-stone-50/50"
             >
               <div className="font-semibold text-stone-900">{idea.title}</div>
-              <div className="text-stone-500 capitalize text-[11px] mb-1">{idea.category}</div>
+              <div className="text-stone-700 capitalize text-[11px] mb-1 font-medium">
+                {idea.category}
+              </div>
               <p className="text-stone-700 leading-normal">{idea.description}</p>
             </div>
           ))}

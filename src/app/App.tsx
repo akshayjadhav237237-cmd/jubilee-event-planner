@@ -50,7 +50,7 @@ export function AppContent(): JSX.Element {
 
       <footer
         role="contentinfo"
-        className="border-t border-stone-200 mt-12 py-6 text-center text-sm text-stone-500"
+        className="border-t border-stone-200 mt-12 py-6 text-center text-sm text-stone-700 font-medium"
       >
         <p>Planning heuristics only, not legal, tax, safety or financial advice.</p>
       </footer>

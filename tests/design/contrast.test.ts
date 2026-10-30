@@ -50,11 +50,23 @@ const TOKENS = {
   tealPrimary: '#005B5C',
   marigoldAccent: '#B45309',
   white: '#FFFFFF',
+  stone700: '#44403C',
+  stone600: '#57534E',
 } as const;
 
 describe('Design Token Contrast Ratios (WCAG 2.1 AA)', () => {
   it('guarantees ink-text on paper-bg satisfies AA normal text (>= 4.5:1)', () => {
     const ratio = calculateContrastRatio(TOKENS.inkText, TOKENS.paperBg);
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('guarantees stone-700 secondary text on paper-bg satisfies AA normal text (>= 4.5:1)', () => {
+    const ratio = calculateContrastRatio(TOKENS.stone700, TOKENS.paperBg);
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('guarantees stone-600 muted text on paper-bg satisfies AA normal text (>= 4.5:1)', () => {
+    const ratio = calculateContrastRatio(TOKENS.stone600, TOKENS.paperBg);
     expect(ratio).toBeGreaterThanOrEqual(4.5);
   });
 

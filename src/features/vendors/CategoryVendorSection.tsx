@@ -20,7 +20,7 @@ export function CategoryVendorSection({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-100 pb-3 gap-2">
         <div>
           <h3 className="font-semibold text-lg text-ink-text">{section.categoryName}</h3>
-          <div className="flex items-center gap-3 text-xs text-stone-500 mt-1">
+          <div className="flex items-center gap-3 text-xs text-stone-700 font-medium mt-1">
             <span>Allocated: {section.allocatedFormatted}</span>
             <span>Committed: {section.committedFormatted}</span>
           </div>
@@ -71,7 +71,7 @@ export function CategoryVendorSection({
                   onChange={() => onToggleChecklist(item.id)}
                   className="mt-0.5 rounded text-gold-accent focus:ring-gold-accent"
                 />
-                <span className={item.completed ? 'line-through text-stone-400' : ''}>
+                <span className={item.completed ? 'line-through text-stone-600' : ''}>
                   {item.title}
                 </span>
               </label>

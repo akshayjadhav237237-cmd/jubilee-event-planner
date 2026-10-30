@@ -39,21 +39,21 @@ export function VitalsStrip({ plan }: VitalsStripProps): JSX.Element {
     <section aria-label="Event vitals" className="mb-8 w-full">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white border border-stone-200 rounded-lg p-4 shadow-sm">
-          <span className="block text-xs uppercase font-semibold text-stone-500 tracking-wider mb-1">
+          <span className="block text-xs uppercase font-semibold text-stone-700 tracking-wider mb-1">
             Timeline
           </span>
           <span className="text-lg font-bold text-stone-900">{daysText}</span>
         </div>
 
         <div className="bg-white border border-stone-200 rounded-lg p-4 shadow-sm">
-          <span className="block text-xs uppercase font-semibold text-stone-500 tracking-wider mb-1">
+          <span className="block text-xs uppercase font-semibold text-stone-700 tracking-wider mb-1">
             Budget
           </span>
           <span className="text-lg font-bold text-stone-900">{budgetText}</span>
         </div>
 
         <div className="bg-white border border-stone-200 rounded-lg p-4 shadow-sm">
-          <span className="block text-xs uppercase font-semibold text-stone-500 tracking-wider mb-1">
+          <span className="block text-xs uppercase font-semibold text-stone-700 tracking-wider mb-1">
             Checklist
           </span>
           <span className="text-lg font-bold text-stone-900">{tasksText}</span>

@@ -63,7 +63,7 @@ export function IntakeFlagsAndPriorities({
         <span className="block text-sm font-medium text-stone-700 mb-1">
           Top 3 Priorities (Pick exactly 3, selected: {top3Priorities.length}/3)
         </span>
-        <p className="text-xs text-stone-500 mb-2">
+        <p className="text-xs text-stone-700 mb-2">
           Priorities guide personalized inspiration suggestions and strategic celebration focus.
         </p>
         <div className="flex flex-wrap gap-2">

@@ -26,7 +26,7 @@ export function VendorQuotesList({ quotes, onRemoveQuote }: VendorQuotesListProp
           >
             <div>
               <span className="font-semibold text-ink-text">{q.vendorName}</span>
-              <div className="text-stone-500 font-mono mt-0.5">
+              <div className="text-stone-700 font-mono font-medium mt-0.5">
                 Amount: {(q.amount / 100).toLocaleString()} | Status: {q.status}
               </div>
               {q.notes && <p className="text-stone-600 mt-1 italic">{q.notes}</p>}

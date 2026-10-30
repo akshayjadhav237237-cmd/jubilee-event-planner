@@ -37,7 +37,7 @@ export function BudgetCategoryList({ rows }: BudgetCategoryListProps): JSX.Eleme
             label={`${row.name} spend progress`}
           />
 
-          <div className="text-right text-xs text-stone-500 font-mono">
+          <div className="text-right text-xs text-stone-700 font-mono font-medium">
             Remaining: {row.remainingFormatted}
           </div>
         </div>
