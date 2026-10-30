@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akshayjadhav237237-cmd.github.io/jubilee-event-planner/sitemap.xml
