@@ -2,7 +2,28 @@
   "name": "jubilee-event-planner",
   "private": true,
   "version": "0.1.0",
+  "description": "GenAI-powered Celebration & Event Planner for PromptWars Challenge 5",
+  "license": "MIT",
   "type": "module",
+  "homepage": "https://akshayjadhav237237-cmd.github.io/jubilee-event-planner/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akshayjadhav237237-cmd/jubilee-event-planner.git"
+  },
+  "keywords": [
+    "event-planner",
+    "wedding-planner",
+    "react",
+    "typescript",
+    "vite",
+    "gemini",
+    "github-pages",
+    "offline-first",
+    "accessibility"
+  ],
+  "engines": {
+    "node": "^20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

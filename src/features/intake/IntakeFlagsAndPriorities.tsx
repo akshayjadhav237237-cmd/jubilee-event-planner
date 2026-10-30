@@ -64,7 +64,7 @@ export function IntakeFlagsAndPriorities({
           Top 3 Priorities (Pick exactly 3, selected: {top3Priorities.length}/3)
         </span>
         <p className="text-xs text-stone-500 mb-2">
-          Priorities receive weighted budget protection during automated reallocations.
+          Priorities guide personalized inspiration suggestions and strategic celebration focus.
         </p>
         <div className="flex flex-wrap gap-2">
           {availablePriorities.map((priority) => {
