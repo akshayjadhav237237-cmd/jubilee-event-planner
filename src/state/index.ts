@@ -11,3 +11,6 @@ export { createMemoryStorage } from './memoryStorage';
 
 export type { PlanStoreDependencies } from './store';
 export { createPlanStore } from './store';
+
+export type { DispatchActions, HistoryState } from './hooks';
+export { PlanStoreContext, usePlanStore, usePlan, useDispatch, useHistory } from './hooks';

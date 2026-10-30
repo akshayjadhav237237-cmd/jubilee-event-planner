@@ -123,6 +123,7 @@ export default tseslint.config(
   },
   {
     files: ['src/state/**'],
+    ignores: ['src/state/hooks.ts'],
     rules: {
       'no-restricted-imports': [
         'error',
@@ -134,7 +135,24 @@ export default tseslint.config(
           patterns: [
             {
               group: ['../features/**', '../ai/**'],
-              message: 'State layer cannot import react, features, or ai.',
+              message: 'State cannot import features or ai.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/state/hooks.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [{ name: 'react-dom', message: 'Hooks cannot depend on React DOM.' }],
+          patterns: [
+            {
+              group: ['../features/**', '../ai/**'],
+              message: 'Hooks cannot import features or ai.',
             },
           ],
         },
@@ -148,10 +166,7 @@ export default tseslint.config(
         'error',
         {
           patterns: [
-            {
-              group: ['../features/**', '**/features/**'],
-              message: 'Features cannot import other features.',
-            },
+            { group: ['../features/**', '**/features/**'], message: 'No cross-feature imports.' },
           ],
         },
       ],
@@ -173,7 +188,7 @@ export default tseslint.config(
                 '../features/**',
                 '../app/**',
               ],
-              message: 'Shared layer cannot import domain, data, state, ai, features, or app.',
+              message: 'Shared layer isolated.',
             },
           ],
         },

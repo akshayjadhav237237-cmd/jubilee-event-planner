@@ -1,28 +1,39 @@
-import type { JSX } from 'react';
+import { useState, type JSX } from 'react';
+import { usePlan } from '../state/hooks';
 import { SkipLink } from '../shared/ui/SkipLink';
+import { Header } from './Header';
+import { Workspace } from './Workspace';
+import { Launchpad } from '../features/intake/Launchpad';
+import { AssistantDrawer } from '../features/assistant/AssistantDrawer';
+import { AppProviders } from './AppProviders';
 
-/** Renders the core application shell with accessible landmarks and header navigation. */
-export function App(): JSX.Element {
+/** Renders the inner application layout based on plan presence. */
+export function AppContent(): JSX.Element {
+  const plan = usePlan();
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-paper-bg text-ink-text flex flex-col">
-      <SkipLink />
-      <header
-        role="banner"
-        className="border-b border-stone-200 bg-white/80 backdrop-blur px-6 py-4"
-      >
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <span className="text-xl font-bold tracking-tight text-teal-primary">Jubilee</span>
-        </div>
-      </header>
+      <SkipLink targetId="main-content" />
 
-      <main
-        id="main-content"
-        tabIndex={-1}
-        className="max-w-4xl mx-auto px-6 py-12 flex-1 outline-none w-full"
-      >
-        <h1 className="text-3xl font-extrabold tracking-tight mb-4">Jubilee Event Planner</h1>
-        <p className="text-base text-stone-600">Planning shell. Features arrive in later steps.</p>
-      </main>
+      {plan === null ? (
+        <>
+          <Header
+            onToggleAssistant={() => setIsAssistantOpen((prev) => !prev)}
+            isAssistantOpen={isAssistantOpen}
+          />
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className="max-w-6xl mx-auto px-4 sm:px-6 py-12 flex-1 outline-none w-full"
+          >
+            <Launchpad />
+          </main>
+          <AssistantDrawer open={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
+        </>
+      ) : (
+        <Workspace />
+      )}
 
       <footer
         role="contentinfo"
@@ -31,5 +42,14 @@ export function App(): JSX.Element {
         <p>Planning heuristics only, not legal, tax, safety or financial advice.</p>
       </footer>
     </div>
+  );
+}
+
+/** Root component connecting providers and top-level application shell layout. */
+export function App(): JSX.Element {
+  return (
+    <AppProviders>
+      <AppContent />
+    </AppProviders>
   );
 }
