@@ -46,6 +46,7 @@ export default defineConfig({
         'src/shared/lib/**',
         'src/state/**',
         'src/ai/**',
+        'src/export/**',
         'src/features/**/view.ts',
         'src/features/assistant/describe.ts',
       ],
